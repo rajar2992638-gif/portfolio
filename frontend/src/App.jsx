@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import "./App.css";
 
@@ -52,6 +51,24 @@ function App() {
 
               <a href="#contact" className="secondary-button">
                 Contact Me
+              </a>
+
+              {/* RESUME BUTTONS */}
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="secondary-button"
+              >
+                View Resume
+              </a>
+
+              <a
+                href="/resume.pdf"
+                download="Raja-Full-Stack-Developer-Resume.pdf"
+                className="primary-button"
+              >
+                Download Resume
               </a>
             </div>
           </div>
@@ -241,8 +258,7 @@ function App() {
               <div className="degree-title">
                 <div className="barcode"></div>
 
-
-              <h3>B.Sc Computer Science </h3>
+                <h3>B.Sc Computer Science</h3>
 
                 <div className="barcode"></div>
               </div>
@@ -302,52 +318,6 @@ function App() {
                 </button>
               </div>
             </div>
-
-            {/*
-            CERTIFICATE 02
-
-            <div className="certificate-card">
-              <div className="certificate-image">
-                <img
-                  src="/certificates/certificate2.jpg"
-                  alt="GUVI Certificate 2"
-                />
-              </div>
-
-              <div className="certificate-content">
-                <span>GUVI</span>
-                <h3>Web Development Certificate</h3>
-
-                <p>
-                  Certificate earned through GUVI for successfully
-                  completing the course.
-                </p>
-              </div>
-            </div>
-            */}
-
-            {/*
-            CERTIFICATE 03
-
-            <div className="certificate-card">
-              <div className="certificate-image">
-                <img
-                  src="/certificates/certificate3.jpg"
-                  alt="GUVI Certificate 3"
-                />
-              </div>
-
-              <div className="certificate-content">
-                <span>GUVI</span>
-                <h3>Programming Certificate</h3>
-
-                <p>
-                  Certificate earned through GUVI for successfully
-                  completing the course.
-                </p>
-              </div>
-            </div>
-            */}
           </div>
         </section>
 
@@ -410,11 +380,13 @@ function App() {
             </p>
 
             <div className="contact-details">
+              {/* MOBILE */}
               <p>
                 <strong>Mobile:</strong>{" "}
                 <a href="tel:6383397302">6383397302</a>
               </p>
 
+              {/* EMAIL */}
               <p>
                 <strong>Email:</strong>{" "}
                 <a href="mailto:rajar2992638@gmail.com">
@@ -422,6 +394,7 @@ function App() {
                 </a>
               </p>
 
+              {/* GITHUB */}
               <p>
                 <strong>GitHub:</strong>{" "}
                 <a
@@ -432,6 +405,40 @@ function App() {
                   github.com/rajar2992638-gif
                 </a>
               </p>
+
+              {/* LINKEDIN */}
+              <p>
+                <strong>LinkedIn:</strong>{" "}
+                <a
+                  href="https://www.linkedin.com/in/rajar2992638"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  LinkedIn Profile
+                </a>
+              </p>
+
+              {/* RESUME
+              <p>
+                <strong>Resume:</strong>{" "}
+                <a
+                  href="/resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Resume
+                </a>
+                {" | "}
+                <a
+                  href="/resume.pdf"
+                  download="Raja-Full-Stack-Developer-Resume.pdf"
+                >
+                  Download Resume
+                </a>
+              </p>
+              */}
+
+
             </div>
           </div>
         </section>
@@ -476,4 +483,3 @@ function App() {
 }
 
 export default App;
-

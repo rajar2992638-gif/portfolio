@@ -1,3 +1,4 @@
+
 /* =====================================================
    GLOBAL
 ===================================================== */
@@ -30,6 +31,7 @@ button {
 .app {
   min-height: 100vh;
   overflow-x: hidden;
+
   background:
     radial-gradient(
       circle at 85% 10%,
@@ -223,6 +225,7 @@ button {
 .hero-buttons {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 
   gap: 14px;
 
@@ -1101,7 +1104,6 @@ button {
 
 /* =====================================================
    CONTACT DETAILS
-   PROFESSIONAL LEFT ICON + RIGHT CONTENT
 ===================================================== */
 
 .contact-details {
@@ -1115,7 +1117,7 @@ button {
 }
 
 
-/* Individual contact card */
+/* Contact card */
 
 .contact-details p {
   position: relative;
@@ -1141,9 +1143,6 @@ button {
   transition: all 0.3s ease;
 }
 
-
-/* Hover */
-
 .contact-details p:hover {
   transform: translateY(-5px);
 
@@ -1158,7 +1157,7 @@ button {
 
 
 /* =====================================================
-   ICON BOX
+   CONTACT ICON BOX
 ===================================================== */
 
 .contact-details p::before {
@@ -1189,26 +1188,48 @@ button {
 }
 
 
-/* Phone icon */
+/* Mobile */
 
 .contact-details p:nth-child(1)::before {
   content: "☎";
 }
 
 
-/* Email icon */
+/* Email */
 
 .contact-details p:nth-child(2)::before {
   content: "✉";
 }
 
 
-/* GitHub icon */
+/* GitHub */
 
 .contact-details p:nth-child(3)::before {
   content: "GH";
 
   font-size: 13px;
+
+  letter-spacing: -1px;
+}
+
+
+/* LinkedIn */
+
+.contact-details p:nth-child(4)::before {
+  content: "in";
+
+  font-size: 15px;
+
+  font-weight: 900;
+}
+
+
+/* Resume */
+
+.contact-details p:nth-child(5)::before {
+  content: "CV";
+
+  font-size: 12px;
 
   letter-spacing: -1px;
 }
@@ -1248,7 +1269,7 @@ button {
 }
 
 .contact-details p a {
-  display: block;
+  display: inline-block;
 
   color: #d5d5d5;
 
@@ -1264,6 +1285,36 @@ button {
 }
 
 .contact-details p a:hover {
+  color: #a78bfa;
+}
+
+
+/* =====================================================
+   LINKEDIN SPECIAL
+===================================================== */
+
+.contact-details p:nth-child(4) a {
+  color: #d5d5d5;
+}
+
+.contact-details p:nth-child(4) a:hover {
+  color: #a78bfa;
+}
+
+
+/* =====================================================
+   RESUME SPECIAL
+===================================================== */
+
+.contact-details p:nth-child(5) {
+  grid-column: span 1;
+}
+
+.contact-details p:nth-child(5) a {
+  color: #d5d5d5;
+}
+
+.contact-details p:nth-child(5) a:hover {
   color: #a78bfa;
 }
 
@@ -1336,7 +1387,7 @@ footer p {
   }
 
   .contact-details {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -1388,6 +1439,11 @@ footer p {
 
   .hero-buttons {
     flex-wrap: wrap;
+  }
+
+  .primary-button,
+  .secondary-button {
+    min-height: 46px;
   }
 
 
@@ -1517,7 +1573,7 @@ footer p {
   }
 
 
-  /* Contact details mobile */
+  /* Contact details */
 
   .contact-details {
     grid-template-columns: 1fr;
@@ -1603,3 +1659,4 @@ footer p {
     width: 100%;
   }
 }
+
