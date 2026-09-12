@@ -1,4 +1,3 @@
-
 /* =====================================================
    GLOBAL
 ===================================================== */
@@ -186,6 +185,66 @@ button {
 
   max-width: 720px;
 }
+
+
+/* =====================================================
+   PROFILE IMAGE
+===================================================== */
+
+.profile-image-container {
+  width: 170px;
+  height: 170px;
+
+  margin-bottom: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: linear-gradient(
+    135deg,
+    #7c3aed,
+    #a78bfa
+  );
+
+  padding: 4px;
+
+  box-shadow:
+    0 0 0 8px rgba(139, 92, 246, 0.06),
+    0 20px 55px rgba(124, 58, 237, 0.30);
+
+  transition: 0.35s ease;
+}
+
+.profile-image-container:hover {
+  transform: translateY(-5px) scale(1.03);
+
+  box-shadow:
+    0 0 0 10px rgba(139, 92, 246, 0.08),
+    0 25px 65px rgba(124, 58, 237, 0.40);
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  border: 4px solid #070707;
+
+  background: #111111;
+}
+
+
+/* =====================================================
+   HERO TEXT
+===================================================== */
 
 .eyebrow {
   margin-bottom: 20px;
@@ -1116,9 +1175,6 @@ button {
   margin-top: 42px;
 }
 
-
-/* Contact card */
-
 .contact-details p {
   position: relative;
 
@@ -1188,7 +1244,7 @@ button {
 }
 
 
-/* Mobile */
+/* Phone */
 
 .contact-details p:nth-child(1)::before {
   content: "☎";
@@ -1427,6 +1483,19 @@ footer p {
     padding: 75px 5%;
   }
 
+  /* Mobile Profile Image */
+
+  .profile-image-container {
+    width: 135px;
+    height: 135px;
+
+    margin-bottom: 25px;
+  }
+
+  .profile-image {
+    border-width: 3px;
+  }
+
   .hero h1 {
     font-size: 58px;
 
@@ -1642,6 +1711,11 @@ footer p {
 
 @media (max-width: 400px) {
 
+  .profile-image-container {
+    width: 120px;
+    height: 120px;
+  }
+
   .hero h1 {
     font-size: 49px;
   }
@@ -1659,4 +1733,3 @@ footer p {
     width: 100%;
   }
 }
-

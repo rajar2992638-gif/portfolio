@@ -6,6 +6,7 @@ function App() {
 
   return (
     <div className="app">
+
       {/* NAVBAR */}
       <nav className="navbar">
         <a href="#home" className="logo">
@@ -28,9 +29,21 @@ function App() {
       </nav>
 
       <main>
+
         {/* HOME */}
         <section id="home" className="hero">
+
           <div className="hero-content">
+
+            {/* PROFILE IMAGE */}
+            <div className="profile-image-container">
+              <img
+                src="/profile.png"
+                alt="Raja - Full Stack Developer"
+                className="profile-image"
+              />
+            </div>
+
             <p className="eyebrow">HELLO, I'M</p>
 
             <h1>
@@ -45,6 +58,7 @@ function App() {
             </p>
 
             <div className="hero-buttons">
+
               <a href="#projects" className="primary-button">
                 View My Work
               </a>
@@ -53,7 +67,7 @@ function App() {
                 Contact Me
               </a>
 
-              {/* RESUME BUTTONS */}
+              {/* VIEW RESUME */}
               <a
                 href="/resume.pdf"
                 target="_blank"
@@ -63,6 +77,7 @@ function App() {
                 View Resume
               </a>
 
+              {/* DOWNLOAD RESUME */}
               <a
                 href="/resume.pdf"
                 download="Raja-Full-Stack-Developer-Resume.pdf"
@@ -70,11 +85,14 @@ function App() {
               >
                 Download Resume
               </a>
+
             </div>
           </div>
 
+          {/* CODE CARD */}
           <div className="hero-card">
             <div className="code-window">
+
               <div className="window-top">
                 <span></span>
                 <span></span>
@@ -92,21 +110,29 @@ function App() {
   ],
   passion: "Building Web Apps"
 };`}</pre>
+
             </div>
           </div>
+
         </section>
+
 
         {/* ABOUT */}
         <section id="about" className="section about">
+
           <div className="section-heading">
             <p>ABOUT ME</p>
             <h2>Turning Ideas Into Digital Experiences</h2>
           </div>
 
           <div className="about-content">
-            <div className="about-number">01</div>
+
+            <div className="about-number">
+              01
+            </div>
 
             <div>
+
               <p>
                 I am a B.Sc Computer Science student at Madura College with
                 a strong interest in Full Stack Development and modern web
@@ -122,18 +148,23 @@ function App() {
                 My goal is to continuously improve my technical skills and
                 build useful products that solve real-world problems.
               </p>
+
             </div>
           </div>
+
         </section>
+
 
         {/* SKILLS */}
         <section id="skills" className="section">
+
           <div className="section-heading">
             <p>MY SKILLS</p>
             <h2>Technologies I Work With</h2>
           </div>
 
           <div className="skills-grid">
+
             <div className="skill-card">
               <div className="skill-icon">01</div>
               <h3>Frontend</h3>
@@ -157,20 +188,27 @@ function App() {
               <h3>Programming</h3>
               <p>JavaScript and Python</p>
             </div>
+
           </div>
+
         </section>
+
 
         {/* PROJECTS */}
         <section id="projects" className="section projects">
+
           <div className="section-heading">
             <p>MY PROJECTS</p>
             <h2>Things I've Built</h2>
           </div>
 
           <div className="projects-grid">
+
             {/* PROJECT 01 */}
             <div className="project-card">
+
               <div className="project-info">
+
                 <span className="project-label">
                   FULL STACK PROJECT
                 </span>
@@ -191,23 +229,37 @@ function App() {
                   <span>MongoDB</span>
                 </div>
 
-                <a href="#" className="project-link">
+                <a
+                  href="#"
+                  className="project-link"
+                >
                   View Project →
                 </a>
+
               </div>
 
               <div className="project-visual">
-                <div className="project-logo">R</div>
+
+                <div className="project-logo">
+                  R
+                </div>
 
                 <h4>Raja E-Commerce</h4>
 
-                <p>Online Shopping Web Application</p>
+                <p>
+                  Online Shopping Web Application
+                </p>
+
               </div>
+
             </div>
+
 
             {/* PROJECT 02 */}
             <div className="project-card">
+
               <div className="project-info">
+
                 <span className="project-label">
                   SOCIAL MEDIA PROJECT
                 </span>
@@ -228,39 +280,60 @@ function App() {
                   <span>MongoDB</span>
                 </div>
 
-                <a href="#" className="project-link">
+                <a
+                  href="#"
+                  className="project-link"
+                >
                   View Project →
                 </a>
+
               </div>
 
               <div className="project-visual">
-                <div className="project-logo">C✦</div>
+
+                <div className="project-logo">
+                  C✦
+                </div>
 
                 <h4>Connectly</h4>
 
-                <p>Instagram-Inspired Social Media App</p>
+                <p>
+                  Instagram-Inspired Social Media App
+                </p>
+
               </div>
+
             </div>
+
           </div>
+
         </section>
+
 
         {/* EDUCATION */}
         <section id="education" className="section education">
+
           <div className="section-heading">
             <p>EDUCATION</p>
             <h2>My Academic Journey</h2>
           </div>
 
           <div className="education-card">
-            <div className="education-year">CURRENT</div>
+
+            <div className="education-year">
+              CURRENT
+            </div>
 
             <div>
+
               <div className="degree-title">
+
                 <div className="barcode"></div>
 
                 <h3>B.Sc Computer Science</h3>
 
                 <div className="barcode"></div>
+
               </div>
 
               <h4>Madura College</h4>
@@ -269,36 +342,53 @@ function App() {
                 Building a strong foundation in computer science,
                 programming and software development.
               </p>
+
             </div>
+
           </div>
+
         </section>
 
+
         {/* CERTIFICATIONS */}
-        <section id="certifications" className="section certifications">
+        <section
+          id="certifications"
+          className="section certifications"
+        >
+
           <div className="section-heading">
             <p>CERTIFICATIONS</p>
             <h2>My Certificates</h2>
           </div>
 
           <div className="certificates-grid">
+
             {/* CERTIFICATE 01 */}
             <div
               className="certificate-card certificate-clickable"
               onClick={() =>
-                setSelectedCertificate("/certificates/certificate1.jpg")
+                setSelectedCertificate(
+                  "/certificates/certificate1.jpg"
+                )
               }
             >
+
               <div className="certificate-image">
+
                 <img
                   src="/certificates/certificate1.jpg"
                   alt="GUVI Certificate 1"
                 />
+
               </div>
 
               <div className="certificate-content">
+
                 <span>GUVI</span>
 
-                <h3>Full Stack Development Certificate</h3>
+                <h3>
+                  Full Stack Development Certificate
+                </h3>
 
                 <p>
                   Certificate earned through GUVI for successfully
@@ -309,6 +399,7 @@ function App() {
                   className="certificate-link"
                   onClick={(e) => {
                     e.stopPropagation();
+
                     setSelectedCertificate(
                       "/certificates/certificate1.jpg"
                     );
@@ -316,58 +407,86 @@ function App() {
                 >
                   View Certificate →
                 </button>
+
               </div>
+
             </div>
+
           </div>
+
         </section>
+
 
         {/* SERVICES */}
         <section className="section services">
+
           <div className="section-heading">
             <p>WHAT I DO</p>
             <h2>My Development Services</h2>
           </div>
 
           <div className="services-grid">
+
             <div className="service-card">
+
               <span>01</span>
 
-              <h3>Web Development</h3>
+              <h3>
+                Web Development
+              </h3>
 
               <p>
                 Responsive and modern websites using HTML, CSS,
                 JavaScript and React.
               </p>
+
             </div>
 
+
             <div className="service-card">
+
               <span>02</span>
 
-              <h3>Full Stack Applications</h3>
+              <h3>
+                Full Stack Applications
+              </h3>
 
               <p>
                 Complete web applications with frontend, backend,
                 APIs and databases.
               </p>
+
             </div>
 
+
             <div className="service-card">
+
               <span>03</span>
 
-              <h3>UI Development</h3>
+              <h3>
+                UI Development
+              </h3>
 
               <p>
                 Clean, responsive and user-friendly interfaces for
                 web applications.
               </p>
+
             </div>
+
           </div>
+
         </section>
+
 
         {/* CONTACT */}
         <section id="contact" className="section contact">
+
           <div className="contact-box">
-            <p>GET IN TOUCH</p>
+
+            <p>
+              GET IN TOUCH
+            </p>
 
             <h2>
               Let's Build Something
@@ -380,11 +499,15 @@ function App() {
             </p>
 
             <div className="contact-details">
+
               {/* MOBILE */}
               <p>
                 <strong>Mobile:</strong>{" "}
-                <a href="tel:6383397302">6383397302</a>
+                <a href="tel:6383397302">
+                  6383397302
+                </a>
               </p>
+
 
               {/* EMAIL */}
               <p>
@@ -394,9 +517,11 @@ function App() {
                 </a>
               </p>
 
+
               {/* GITHUB */}
               <p>
                 <strong>GitHub:</strong>{" "}
+
                 <a
                   href="https://github.com/rajar2992638-gif"
                   target="_blank"
@@ -404,11 +529,14 @@ function App() {
                 >
                   github.com/rajar2992638-gif
                 </a>
+
               </p>
+
 
               {/* LINKEDIN */}
               <p>
                 <strong>LinkedIn:</strong>{" "}
+
                 <a
                   href="https://www.linkedin.com/in/rajar2992638"
                   target="_blank"
@@ -416,53 +544,48 @@ function App() {
                 >
                   LinkedIn Profile
                 </a>
-              </p>
 
-              {/* RESUME
-              <p>
-                <strong>Resume:</strong>{" "}
-                <a
-                  href="/resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Resume
-                </a>
-                {" | "}
-                <a
-                  href="/resume.pdf"
-                  download="Raja-Full-Stack-Developer-Resume.pdf"
-                >
-                  Download Resume
-                </a>
               </p>
-              */}
-
 
             </div>
+
           </div>
+
         </section>
+
       </main>
+
 
       {/* FOOTER */}
       <footer>
+
         <div>
+
           <strong>
             Raja<span>.</span>
           </strong>
 
-          <p>Full Stack Developer</p>
+          <p>
+            Full Stack Developer
+          </p>
+
         </div>
 
-        <p>© 2026 Raja. All rights reserved.</p>
+        <p>
+          © 2026 Raja. All rights reserved.
+        </p>
+
       </footer>
+
 
       {/* CERTIFICATE FULLSCREEN MODAL */}
       {selectedCertificate && (
+
         <div
           className="certificate-modal"
           onClick={() => setSelectedCertificate(null)}
         >
+
           <button
             className="certificate-close"
             onClick={() => setSelectedCertificate(null)}
@@ -476,8 +599,11 @@ function App() {
             className="certificate-fullscreen"
             onClick={(e) => e.stopPropagation()}
           />
+
         </div>
+
       )}
+
     </div>
   );
 }
