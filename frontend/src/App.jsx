@@ -52,7 +52,7 @@ function App() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/project-request",
+        "https://portfolio-dzc5.onrender.com/api/project-request",
         {
           method: "POST",
           headers: {
