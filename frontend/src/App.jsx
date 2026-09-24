@@ -1,11 +1,103 @@
+
 import { useState } from "react";
 import "./App.css";
 
 function App() {
   const [selectedCertificate, setSelectedCertificate] = useState(null);
+  const [showProjectModal, setShowProjectModal] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [requestId, setRequestId] = useState("");
+  const [sending, setSending] = useState(false);
+
+  const [projectForm, setProjectForm] = useState({
+    name: "",
+    email: "",
+    mobile: "",
+    company: "",
+    projectType: "",
+    budget: "",
+    timeline: "",
+    description: "",
+  });
+
+  const openProjectModal = () => {
+    setSubmitted(false);
+    setRequestId("");
+    setShowProjectModal(true);
+  };
+
+  const closeProjectModal = () => {
+    setShowProjectModal(false);
+    setSubmitted(false);
+    setRequestId("");
+  };
+
+  const handleChange = (e) => {
+    setProjectForm({
+      ...projectForm,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  /* =========================
+     SEND PROJECT REQUEST
+  ========================= */
+
+  const handleProjectSubmit = async (e) => {
+    e.preventDefault();
+
+    if (sending) return;
+
+    setSending(true);
+
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/project-request",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            fullName: projectForm.name,
+            email: projectForm.email,
+            mobile: projectForm.mobile,
+            company: projectForm.company,
+            projectType: projectForm.projectType,
+            budget: projectForm.budget,
+            timeline: projectForm.timeline,
+            description: projectForm.description,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.message || "Failed to send project request"
+        );
+      }
+
+      setRequestId(data.requestId || "");
+      setSubmitted(true);
+
+      console.log("Project request sent successfully:", data);
+
+    } catch (error) {
+      console.error("Project request error:", error);
+
+      alert(
+        "Unable to send your project request. Please make sure the backend server is running."
+      );
+    } finally {
+      setSending(false);
+    }
+  };
 
   return (
     <div className="app">
+
       {/* =========================
           NAVBAR
       ========================= */}
@@ -24,14 +116,18 @@ function App() {
           <a href="#contact">Contact</a>
         </div>
 
-        <a href="#contact" className="nav-button">
-          Let's Talk
-        </a>
+        <button
+          className="nav-button"
+          onClick={openProjectModal}
+        >
+          Start a Project
+        </button>
       </nav>
 
       <main>
+
         {/* =========================
-            HOME
+            HERO
         ========================= */}
         <section id="home" className="hero">
           <div className="hero-content">
@@ -41,7 +137,9 @@ function App() {
               Hi, I'm <span>Raja</span>
             </h1>
 
-            <h2 className="hero-role">Full Stack Developer</h2>
+            <h2 className="hero-role">
+              Full Stack Developer
+            </h2>
 
             <p className="hero-text">
               B.Sc Computer Science student passionate about building
@@ -59,13 +157,19 @@ function App() {
             </div>
 
             <div className="hero-buttons">
-              <a href="#projects" className="primary-button">
+              <a
+                href="#projects"
+                className="primary-button"
+              >
                 View My Projects
               </a>
 
-              <a href="#contact" className="secondary-button">
-                Let's Connect
-              </a>
+              <button
+                className="secondary-button project-cta"
+                onClick={openProjectModal}
+              >
+                Start a Project ↗
+              </button>
 
               <a
                 href="/resume.pdf"
@@ -81,12 +185,15 @@ function App() {
           {/* PROFILE CARD */}
           <div className="hero-card">
             <div className="developer-card">
+
               <div className="developer-card-top">
                 <div className="status-dot"></div>
-                <span>AVAILABLE FOR OPPORTUNITIES</span>
+                <span>AVAILABLE FOR PROJECTS</span>
               </div>
 
-              <div className="developer-initial">R</div>
+              <div className="developer-initial">
+                R
+              </div>
 
               <h3>Raja</h3>
 
@@ -97,31 +204,42 @@ function App() {
               <div className="developer-line"></div>
 
               <div className="developer-info">
+
                 <div>
                   <span>EDUCATION</span>
-                  <strong>B.Sc Computer Science</strong>
+                  <strong>
+                    B.Sc Computer Science
+                  </strong>
                 </div>
 
                 <div>
                   <span>COLLEGE</span>
-                  <strong>Madura College</strong>
+                  <strong>
+                    Madura College
+                  </strong>
                 </div>
 
                 <div>
                   <span>FOCUS</span>
-                  <strong>Web Application Development</strong>
+                  <strong>
+                    Web Application Development
+                  </strong>
                 </div>
 
                 <div>
                   <span>TECH STACK</span>
-                  <strong>MERN Stack</strong>
+                  <strong>
+                    MERN Stack
+                  </strong>
                 </div>
+
               </div>
 
               <div className="developer-footer">
                 <span>&lt;/&gt;</span>
                 <p>Learn • Build • Improve</p>
               </div>
+
             </div>
           </div>
         </section>
@@ -129,33 +247,46 @@ function App() {
         {/* =========================
             ABOUT
         ========================= */}
-        <section id="about" className="section about">
+        <section
+          id="about"
+          className="section about"
+        >
           <div className="section-heading">
             <p>ABOUT ME</p>
-            <h2>Turning Ideas Into Digital Experiences</h2>
+
+            <h2>
+              Turning Ideas Into Digital Experiences
+            </h2>
           </div>
 
           <div className="about-content">
-            <div className="about-number">01</div>
+
+            <div className="about-number">
+              01
+            </div>
 
             <div>
+
               <p>
-                I am a B.Sc Computer Science student at Madura College
-                with a strong interest in Full Stack Development and
-                modern web technologies.
+                I am a B.Sc Computer Science student at
+                Madura College with a strong interest in
+                Full Stack Development and modern web
+                technologies.
               </p>
 
               <p>
-                I enjoy creating complete web applications, developing
-                responsive interfaces, working with APIs and managing
-                databases.
+                I enjoy creating complete web applications,
+                developing responsive interfaces, working
+                with APIs and managing databases.
               </p>
 
               <p>
-                I continuously work on improving my programming and
-                development skills by building real-world projects
-                and learning new technologies.
+                I continuously work on improving my
+                programming and development skills by
+                building real-world projects and learning
+                new technologies.
               </p>
+
             </div>
           </div>
         </section>
@@ -163,64 +294,111 @@ function App() {
         {/* =========================
             SKILLS
         ========================= */}
-        <section id="skills" className="section">
+        <section
+          id="skills"
+          className="section"
+        >
           <div className="section-heading">
+
             <p>MY SKILLS</p>
-            <h2>Technologies I Work With</h2>
+
+            <h2>
+              Technologies I Work With
+            </h2>
+
           </div>
 
           <div className="skills-grid">
+
             <div className="skill-card">
-              <div className="skill-icon">01</div>
+              <div className="skill-icon">
+                01
+              </div>
+
               <h3>Frontend</h3>
-              <p>HTML, CSS, JavaScript and React.js</p>
+
+              <p>
+                HTML, CSS, JavaScript and React.js
+              </p>
             </div>
 
             <div className="skill-card">
-              <div className="skill-icon">02</div>
+              <div className="skill-icon">
+                02
+              </div>
+
               <h3>Backend</h3>
-              <p>Node.js, Express.js and REST APIs</p>
+
+              <p>
+                Node.js, Express.js and REST APIs
+              </p>
             </div>
 
             <div className="skill-card">
-              <div className="skill-icon">03</div>
+              <div className="skill-icon">
+                03
+              </div>
+
               <h3>Database</h3>
-              <p>MongoDB and database management</p>
+
+              <p>
+                MongoDB and database management
+              </p>
             </div>
 
             <div className="skill-card">
-              <div className="skill-icon">04</div>
+              <div className="skill-icon">
+                04
+              </div>
+
               <h3>Programming</h3>
-              <p>JavaScript and Python</p>
+
+              <p>
+                JavaScript and Python
+              </p>
             </div>
+
           </div>
         </section>
 
         {/* =========================
             PROJECTS
         ========================= */}
-        <section id="projects" className="section projects">
+        <section
+          id="projects"
+          className="section projects"
+        >
           <div className="section-heading">
+
             <p>MY PROJECTS</p>
-            <h2>Things I've Built</h2>
+
+            <h2>
+              Things I've Built
+            </h2>
+
           </div>
 
           <div className="projects-grid">
-            {/* PROJECT 01 */}
+
             <div className="project-card">
+
               <div className="project-info">
+
                 <span className="project-label">
                   FULL STACK PROJECT
                 </span>
 
-                <h3>Raja E-Commerce</h3>
+                <h3>
+                  Raja E-Commerce
+                </h3>
 
                 <p>
-                  A full stack e-commerce web application designed
-                  to provide a modern and user-friendly online
-                  shopping experience. The project includes
-                  product management, authentication, backend APIs
-                  and database integration.
+                  A full stack e-commerce web application
+                  designed to provide a modern and
+                  user-friendly online shopping experience.
+                  The project includes product management,
+                  authentication, backend APIs and database
+                  integration.
                 </p>
 
                 <div className="tech-stack">
@@ -233,35 +411,51 @@ function App() {
                 <a
                   href="#"
                   className="project-link"
-                  onClick={(e) => e.preventDefault()}
+                  onClick={(e) =>
+                    e.preventDefault()
+                  }
                 >
                   View Project →
                 </a>
+
               </div>
 
               <div className="project-visual">
-                <div className="project-logo">R</div>
 
-                <h4>Raja E-Commerce</h4>
+                <div className="project-logo">
+                  R
+                </div>
 
-                <p>Online Shopping Web Application</p>
+                <h4>
+                  Raja E-Commerce
+                </h4>
+
+                <p>
+                  Online Shopping Web Application
+                </p>
+
               </div>
+
             </div>
 
-            {/* PROJECT 02 */}
             <div className="project-card">
+
               <div className="project-info">
+
                 <span className="project-label">
                   SOCIAL MEDIA PROJECT
                 </span>
 
-                <h3>Connectly</h3>
+                <h3>
+                  Connectly
+                </h3>
 
                 <p>
-                  An Instagram-inspired social media web application
-                  designed with a modern social platform interface.
-                  The project includes frontend UI, backend APIs,
-                  user features and database management.
+                  An Instagram-inspired social media web
+                  application designed with a modern social
+                  platform interface. The project includes
+                  frontend UI, backend APIs, user features
+                  and database management.
                 </p>
 
                 <div className="tech-stack">
@@ -274,51 +468,85 @@ function App() {
                 <a
                   href="#"
                   className="project-link"
-                  onClick={(e) => e.preventDefault()}
+                  onClick={(e) =>
+                    e.preventDefault()
+                  }
                 >
                   View Project →
                 </a>
+
               </div>
 
               <div className="project-visual">
-                <div className="project-logo">C✦</div>
 
-                <h4>Connectly</h4>
+                <div className="project-logo">
+                  C✦
+                </div>
 
-                <p>Instagram-Inspired Social Media App</p>
+                <h4>
+                  Connectly
+                </h4>
+
+                <p>
+                  Instagram-Inspired Social Media App
+                </p>
+
               </div>
+
             </div>
+
           </div>
         </section>
 
         {/* =========================
             EDUCATION
         ========================= */}
-        <section id="education" className="section education">
+        <section
+          id="education"
+          className="section education"
+        >
           <div className="section-heading">
+
             <p>EDUCATION</p>
-            <h2>My Academic Journey</h2>
+
+            <h2>
+              My Academic Journey
+            </h2>
+
           </div>
 
           <div className="education-card">
-            <div className="education-year">CURRENT</div>
+
+            <div className="education-year">
+              CURRENT
+            </div>
 
             <div>
+
               <div className="degree-title">
-                <div className="barcode"></div>
-
-                <h3>B.Sc Computer Science</h3>
 
                 <div className="barcode"></div>
+
+                <h3>
+                  B.Sc Computer Science
+                </h3>
+
+                <div className="barcode"></div>
+
               </div>
 
-              <h4>Madura College</h4>
+              <h4>
+                Madura College
+              </h4>
 
               <p>
-                Building a strong foundation in computer science,
-                programming and software development.
+                Building a strong foundation in computer
+                science, programming and software
+                development.
               </p>
+
             </div>
+
           </div>
         </section>
 
@@ -330,11 +558,17 @@ function App() {
           className="section certifications"
         >
           <div className="section-heading">
+
             <p>CERTIFICATIONS</p>
-            <h2>My Certificates</h2>
+
+            <h2>
+              My Certificates
+            </h2>
+
           </div>
 
           <div className="certificates-grid">
+
             <div
               className="certificate-card certificate-clickable"
               onClick={() =>
@@ -343,14 +577,18 @@ function App() {
                 )
               }
             >
+
               <div className="certificate-image">
+
                 <img
                   src="/certificates/certificate1.jpg"
                   alt="GUVI Full Stack Development Certificate"
                 />
+
               </div>
 
               <div className="certificate-content">
+
                 <span>GUVI</span>
 
                 <h3>
@@ -358,8 +596,9 @@ function App() {
                 </h3>
 
                 <p>
-                  Certificate earned through GUVI for successfully
-                  completing the Full Stack Development course.
+                  Certificate earned through GUVI for
+                  successfully completing the Full Stack
+                  Development course.
                 </p>
 
                 <button
@@ -374,8 +613,11 @@ function App() {
                 >
                   View Certificate →
                 </button>
+
               </div>
+
             </div>
+
           </div>
         </section>
 
@@ -383,58 +625,111 @@ function App() {
             SERVICES
         ========================= */}
         <section className="section services">
+
           <div className="section-heading">
+
             <p>WHAT I DO</p>
-            <h2>My Development Services</h2>
+
+            <h2>
+              My Development Services
+            </h2>
+
           </div>
 
           <div className="services-grid">
+
             <div className="service-card">
+
               <span>01</span>
 
-              <h3>Web Development</h3>
+              <h3>
+                Web Development
+              </h3>
 
               <p>
-                Responsive and modern websites using HTML, CSS,
-                JavaScript and React.
+                Responsive and modern websites using
+                HTML, CSS, JavaScript and React.
               </p>
+
             </div>
 
             <div className="service-card">
+
               <span>02</span>
 
-              <h3>Full Stack Applications</h3>
+              <h3>
+                Full Stack Applications
+              </h3>
 
               <p>
-                Complete web applications with frontend, backend,
-                APIs and databases.
+                Complete web applications with frontend,
+                backend, APIs and databases.
               </p>
+
             </div>
 
             <div className="service-card">
+
               <span>03</span>
 
-              <h3>UI Development</h3>
+              <h3>
+                UI Development
+              </h3>
 
               <p>
-                Clean, responsive and user-friendly interfaces
-                for modern web applications.
+                Clean, responsive and user-friendly
+                interfaces for modern web applications.
               </p>
+
             </div>
+
           </div>
+
+          {/* PROJECT CTA */}
+
+          <div className="project-request-banner">
+
+            <div>
+
+              <span>
+                HAVE A PROJECT IDEA?
+              </span>
+
+              <h3>
+                Let's turn your idea into a web experience.
+              </h3>
+
+            </div>
+
+            <button
+              className="project-banner-button"
+              onClick={openProjectModal}
+            >
+              Start a Project
+              <span>↗</span>
+            </button>
+
+          </div>
+
         </section>
 
         {/* =========================
             CONTACT
         ========================= */}
-        <section id="contact" className="section contact">
+        <section
+          id="contact"
+          className="section contact"
+        >
           <div className="contact-box">
+
             <p>GET IN TOUCH</p>
 
             <h2>
               Let's Build Something
               <br />
-              <span>Great Together.</span>
+              <span>
+                Great Together.
+              </span>
             </h2>
 
             <p className="contact-text">
@@ -442,107 +737,166 @@ function App() {
               Feel free to reach out.
             </p>
 
-            {/* CONTACT CARDS */}
             <div className="contact-details">
 
-              {/* PHONE */}
               <a
                 href="tel:6383397302"
                 className="contact-card"
               >
-                <div className="contact-icon">📱</div>
 
-                <div className="contact-card-content">
-                  <span>PHONE</span>
-                  <strong>6383397302</strong>
+                <div className="contact-icon">
+                  📱
                 </div>
 
-                <div className="contact-arrow">↗</div>
+                <div className="contact-card-content">
+
+                  <span>
+                    PHONE
+                  </span>
+
+                  <strong>
+                    6383397302
+                  </strong>
+
+                </div>
+
+                <div className="contact-arrow">
+                  ↗
+                </div>
+
               </a>
 
-
-              {/* EMAIL */}
               <a
                 href="mailto:rajar2992638@gmail.com"
                 className="contact-card"
               >
-                <div className="contact-icon">✉</div>
 
-                <div className="contact-card-content">
-                  <span>EMAIL</span>
-                  <strong>rajar2992638@gmail.com</strong>
+                <div className="contact-icon">
+                  ✉
                 </div>
 
-                <div className="contact-arrow">↗</div>
+                <div className="contact-card-content">
+
+                  <span>
+                    EMAIL
+                  </span>
+
+                  <strong>
+                    rajar2992638@gmail.com
+                  </strong>
+
+                </div>
+
+                <div className="contact-arrow">
+                  ↗
+                </div>
+
               </a>
 
-
-              {/* GITHUB */}
               <a
                 href="https://github.com/rajar2992638-gif"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="contact-card"
               >
-                <div className="contact-icon">⌘</div>
 
-                <div className="contact-card-content">
-                  <span>GITHUB</span>
-                  <strong>rajar2992638-gif</strong>
+                <div className="contact-icon">
+                  ⌘
                 </div>
 
-                <div className="contact-arrow">↗</div>
+                <div className="contact-card-content">
+
+                  <span>
+                    GITHUB
+                  </span>
+
+                  <strong>
+                    rajar2992638-gif
+                  </strong>
+
+                </div>
+
+                <div className="contact-arrow">
+                  ↗
+                </div>
+
               </a>
 
-
-              {/* LINKEDIN */}
               <a
                 href="https://www.linkedin.com/in/rajar2992638"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="contact-card"
               >
-                <div className="contact-icon">in</div>
 
-                <div className="contact-card-content">
-                  <span>LINKEDIN</span>
-                  <strong>Raja's LinkedIn</strong>
+                <div className="contact-icon">
+                  in
                 </div>
 
-                <div className="contact-arrow">↗</div>
+                <div className="contact-card-content">
+
+                  <span>
+                    LINKEDIN
+                  </span>
+
+                  <strong>
+                    Raja's LinkedIn
+                  </strong>
+
+                </div>
+
+                <div className="contact-arrow">
+                  ↗
+                </div>
+
               </a>
 
             </div>
           </div>
         </section>
+
       </main>
 
       {/* =========================
           FOOTER
       ========================= */}
       <footer>
+
         <div>
+
           <strong>
             Raja<span>.</span>
           </strong>
 
-          <p>Full Stack Developer</p>
+          <p>
+            Full Stack Developer
+          </p>
+
         </div>
 
-        <p>© 2026 Raja. All rights reserved.</p>
+        <p>
+          © 2026 Raja. All rights reserved.
+        </p>
+
       </footer>
 
       {/* =========================
           CERTIFICATE MODAL
       ========================= */}
       {selectedCertificate && (
+
         <div
           className="certificate-modal"
-          onClick={() => setSelectedCertificate(null)}
+          onClick={() =>
+            setSelectedCertificate(null)
+          }
         >
+
           <button
             className="certificate-close"
-            onClick={() => setSelectedCertificate(null)}
+            onClick={() =>
+              setSelectedCertificate(null)
+            }
           >
             ✕
           </button>
@@ -551,12 +905,387 @@ function App() {
             src={selectedCertificate}
             alt="Certificate Fullscreen"
             className="certificate-fullscreen"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) =>
+              e.stopPropagation()
+            }
           />
+
         </div>
+
       )}
+
+      {/* =========================
+          START PROJECT MODAL
+      ========================= */}
+      {showProjectModal && (
+
+        <div
+          className="project-modal-overlay"
+          onClick={closeProjectModal}
+        >
+
+          <div
+            className="project-modal"
+            onClick={(e) =>
+              e.stopPropagation()
+            }
+          >
+
+            <button
+              className="project-modal-close"
+              onClick={closeProjectModal}
+            >
+              ✕
+            </button>
+
+            {!submitted ? (
+
+              <>
+
+                <div className="project-modal-header">
+
+                  <span>
+                    START A PROJECT
+                  </span>
+
+                  <h2>
+                    Let's build something
+                    <br />
+                    <strong>
+                      great together.
+                    </strong>
+                  </h2>
+
+                  <p>
+                    Tell me about your project and I'll
+                    get back to you with the next steps.
+                  </p>
+
+                </div>
+
+                <form
+                  className="project-form"
+                  onSubmit={handleProjectSubmit}
+                >
+
+                  <div className="form-grid">
+
+                    {/* FULL NAME */}
+
+                    <div className="form-group">
+
+                      <label>
+                        FULL NAME *
+                      </label>
+
+                      <input
+                        type="text"
+                        name="name"
+                        placeholder="Your name"
+                        value={projectForm.name}
+                        onChange={handleChange}
+                        required
+                      />
+
+                    </div>
+
+                    {/* EMAIL */}
+
+                    <div className="form-group">
+
+                      <label>
+                        EMAIL ADDRESS *
+                      </label>
+
+                      <input
+                        type="email"
+                        name="email"
+                        placeholder="you@example.com"
+                        value={projectForm.email}
+                        onChange={handleChange}
+                        required
+                      />
+
+                    </div>
+
+                    {/* MOBILE */}
+
+                    <div className="form-group">
+
+                      <label>
+                        MOBILE NUMBER *
+                      </label>
+
+                      <input
+                        type="tel"
+                        name="mobile"
+                        placeholder="+91 XXXXX XXXXX"
+                        value={projectForm.mobile}
+                        onChange={handleChange}
+                        required
+                      />
+
+                    </div>
+
+                    {/* COMPANY */}
+
+                    <div className="form-group">
+
+                      <label>
+                        COMPANY / BUSINESS
+                      </label>
+
+                      <input
+                        type="text"
+                        name="company"
+                        placeholder="Company name"
+                        value={projectForm.company}
+                        onChange={handleChange}
+                      />
+
+                    </div>
+
+                    {/* PROJECT TYPE */}
+
+                    <div className="form-group">
+
+                      <label>
+                        PROJECT TYPE *
+                      </label>
+
+                      <select
+                        name="projectType"
+                        value={projectForm.projectType}
+                        onChange={handleChange}
+                        required
+                      >
+
+                        <option value="">
+                          Select project type
+                        </option>
+
+                        <option value="Website">
+                          Business Website
+                        </option>
+
+                        <option value="E-Commerce">
+                          E-Commerce Website
+                        </option>
+
+                        <option value="Web Application">
+                          Web Application
+                        </option>
+
+                        <option value="Portfolio">
+                          Portfolio Website
+                        </option>
+
+                        <option value="Social Media">
+                          Social Media Application
+                        </option>
+
+                        <option value="Other">
+                          Other
+                        </option>
+
+                      </select>
+
+                    </div>
+
+                    {/* BUDGET */}
+
+                    <div className="form-group">
+
+                      <label>
+                        BUDGET RANGE
+                      </label>
+
+                      <select
+                        name="budget"
+                        value={projectForm.budget}
+                        onChange={handleChange}
+                      >
+
+                        <option value="">
+                          Select budget
+                        </option>
+
+                        <option value="Below ₹10,000">
+                          Below ₹10,000
+                        </option>
+
+                        <option value="₹10,000 - ₹25,000">
+                          ₹10,000 - ₹25,000
+                        </option>
+
+                        <option value="₹25,000 - ₹50,000">
+                          ₹25,000 - ₹50,000
+                        </option>
+
+                        <option value="₹50,000+">
+                          ₹50,000+
+                        </option>
+
+                        <option value="Not Decided">
+                          Not decided
+                        </option>
+
+                      </select>
+
+                    </div>
+
+                  </div>
+
+                  {/* TIMELINE */}
+
+                  <div className="form-group">
+
+                    <label>
+                      EXPECTED TIMELINE
+                    </label>
+
+                    <select
+                      name="timeline"
+                      value={projectForm.timeline}
+                      onChange={handleChange}
+                    >
+
+                      <option value="">
+                        Select timeline
+                      </option>
+
+                      <option value="1-2 Weeks">
+                        1–2 Weeks
+                      </option>
+
+                      <option value="2-4 Weeks">
+                        2–4 Weeks
+                      </option>
+
+                      <option value="1-2 Months">
+                        1–2 Months
+                      </option>
+
+                      <option value="Flexible">
+                        Flexible
+                      </option>
+
+                    </select>
+
+                  </div>
+
+                  {/* DESCRIPTION */}
+
+                  <div className="form-group">
+
+                    <label>
+                      PROJECT DESCRIPTION *
+                    </label>
+
+                    <textarea
+                      name="description"
+                      placeholder="Tell me about your project, requirements and goals..."
+                      rows="5"
+                      value={projectForm.description}
+                      onChange={handleChange}
+                      required
+                    ></textarea>
+
+                  </div>
+
+                  {/* FORM FOOTER */}
+
+                  <div className="project-form-footer">
+
+                    <p>
+                      🔒 Your information will only be used
+                      to discuss your project.
+                    </p>
+
+                    <button
+                      type="submit"
+                      className="submit-project-button"
+                      disabled={sending}
+                    >
+
+                      {sending
+                        ? "Sending..."
+                        : "Send Project Request"}
+
+                      {!sending && (
+                        <span>↗</span>
+                      )}
+
+                    </button>
+
+                  </div>
+
+                </form>
+
+              </>
+
+            ) : (
+
+              /* =========================
+                 SUCCESS SCREEN
+              ========================= */
+
+              <div className="project-success">
+
+                <div className="success-icon">
+                  ✓
+                </div>
+
+                <span>
+                  REQUEST RECEIVED
+                </span>
+
+                <h2>
+                  Thanks for reaching out!
+                </h2>
+
+                <p>
+                  Your project details have been received.
+                  I'll review your requirements and get back
+                  to you soon.
+                </p>
+
+                {requestId && (
+
+                  <div className="success-reference">
+
+                    <span>
+                      REQUEST ID
+                    </span>
+
+                    <strong>
+                      {requestId}
+                    </strong>
+
+                  </div>
+
+                )}
+
+                <button
+                  className="project-success-button"
+                  onClick={closeProjectModal}
+                >
+                  Back to Portfolio
+                </button>
+
+              </div>
+
+            )}
+
+          </div>
+
+        </div>
+
+      )}
+
     </div>
   );
 }
 
 export default App;
+
